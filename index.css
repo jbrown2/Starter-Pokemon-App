@@ -1,0 +1,13 @@
+.header {
+	padding: 10px;
+	background-image: url("generations.jpg");
+	background-size: contain;
+	background-repeat: repeat;
+	height: 200px;
+
+}
+
+body {
+	background-color: #f8f8ff;
+}
+
