@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DropdownButton, MenuItem} from 'react-bootstrap';
 import './App.css';
 import List from './list';
+import Header from './header';
 
 class Filter extends Component {
     constructor(props) {
@@ -133,7 +134,8 @@ class Filter extends Component {
     render() {
         return (
             <div className="filter-list">
-                <h1>All Generation's Starter Pokemon</h1>
+
+              <Header curr_Gen={this.state.gen}/>
           
                 <div className="buttons">
                 <DropdownButton id="typeDropdown" title={this.state.type}>
