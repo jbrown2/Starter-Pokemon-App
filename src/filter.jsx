@@ -10,11 +10,16 @@ class Filter extends Component {
         super(props);
         this.sortAlph = this.sortAlph.bind(this);
         this.sortNum= this.sortNum.bind(this);
+        this.sortWeight= this.sortWeight.bind(this);
+        this.sortHeight= this.sortHeight.bind(this);
+        this.sortBaseHp= this.sortBaseHp.bind(this);
+        this.sortAttack= this.sortAttack.bind(this);
+        this.sortDefense= this.sortDefense.bind(this);
         this.state = {
             search: "",
             type: "All Types",
             gen: "All Generations",
-            sort: "Select Sort",
+            sort: "Select Sort"
 
         };
 
@@ -97,6 +102,104 @@ class Filter extends Component {
 		    
     }
 
+// Sort by Height
+    sortHeight(items) {
+
+    items.sort(function(a, b){
+
+        if(a.m < b.m){ 
+          
+          return -1;
+        }
+        if(a.m > b.m) {
+          
+          return 1;
+        }
+        return 0;
+    })
+    
+    return items;
+        
+    }
+
+    // Sort by Weight
+    sortWeight(items) {
+
+    items.sort(function(a, b){
+
+        if(a.weight < b.weight){ 
+          
+          return -1;
+        }
+        if(a.weight > b.weight) {
+          
+          return 1;
+        }
+        return 0;
+    })
+    
+    return items;
+        
+    }
+
+    // Sort by Base Hp
+    sortBaseHp(items) {
+
+    items.sort(function(a, b){
+
+        if(a.hp < b.hp){ 
+          
+          return -1;
+        }
+        if(a.hp > b.hp) {
+          
+          return 1;
+        }
+        return 0;
+    })
+    
+    return items;
+        
+    }
+
+    // Sort by Attack Power
+    sortAttack(items) {
+
+    items.sort(function(a, b){
+
+        if(a.atck < b.atck){ 
+          
+          return -1;
+        }
+        if(a.atck > b.atck) {
+          
+          return 1;
+        }
+        return 0;
+    })
+    
+    return items;
+        
+    }
+     // Sort by Defense Power
+    sortDefense(items) {
+
+    items.sort(function(a, b){
+
+        if(a.def < b.def){ 
+          
+          return -1;
+        }
+        if(a.def > b.def) {
+          
+          return 1;
+        }
+        return 0;
+    })
+    
+    return items;
+        
+    }
 //Methods to change the corresponding states
 
     changeStateType = (eventKey: any, event: Object) => {
@@ -118,14 +221,24 @@ class Filter extends Component {
     	//filters the list
     	const finalList= this.props.items.filter(this.filterAll);
     	
-
+console.log(this.state.sort)
     	//sorts the list if necessary
     	if(this.state.sort === "A-Z"){
     		this.sortAlph(finalList)
-
-    	}else if(this.state.sortNum === "Numerically"){
+    	}else if(this.state.sort === "Numerically"){
     		this.sortNum(finalList)
-    	}
+    	}else if(this.state.sort === "Height"){
+        this.sortHeight(finalList)
+      }else if(this.state.sort === "Weight"){
+        this.sortWeight(finalList)
+      }else if(this.state.sort === "Base Hp"){
+        this.sortBaseHp(finalList)
+      }else if(this.state.sort === "Attack"){
+        this.sortAttack(finalList)
+      }else if(this.state.sort === "Defense"){
+        this.sortDefense(finalList)
+      }
+
 
     	return finalList;
 	
@@ -136,6 +249,7 @@ class Filter extends Component {
             <div className="filter-list">
 
               <Header curr_Gen={this.state.gen}/>
+              <p id="compare"> Compare and contrast your favorite, first evolution, starter Pokemon's stats! </p>
           
                 <div className="buttons">
                 <DropdownButton id="typeDropdown" title={this.state.type}>
@@ -162,11 +276,16 @@ class Filter extends Component {
                 	<MenuItem>Select Sort</MenuItem>
                   <MenuItem eventKey="A-Z" onSelect={this.changeStateSort}>A-Z</MenuItem>
                   <MenuItem eventKey="Numerically" onSelect={this.changeStateSort}>Numerically</MenuItem>
+                  <MenuItem eventKey="Height" onSelect={this.changeStateSort}>Height</MenuItem>
+                  <MenuItem eventKey="Weight" onSelect={this.changeStateSort}>Weight</MenuItem>
+                  <MenuItem eventKey="Base Hp" onSelect={this.changeStateSort}>Base Hp</MenuItem>
+                  <MenuItem eventKey="Attack" onSelect={this.changeStateSort}>Attack</MenuItem>
+                  <MenuItem eventKey="Defense" onSelect={this.changeStateSort}>Defense</MenuItem>
                   
                 </DropdownButton>
 
-			 
-                <input type="text" placeholder="Search" onChange={this.onSearch} />
+			       
+                <input type="text" class="search" placeholder="Search" onChange={this.onSearch} />
                 </div>
                 <List items={this.processItems()} />
             </div>

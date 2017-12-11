@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class Header extends Component {
       renderGen() {
 
-        const curr_Gen = "All Generation Starter Pokemon"; 
+        const curr_Gen = "All Generations' Starter Pokemon"; 
 
         return curr_Gen;
 
